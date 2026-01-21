@@ -32,7 +32,7 @@ const CONFIG = {
             originalPrice: null,
             category: "scripts",
             badge: null,
-            image: null,
+            image: "assets/product.png",
             tags: ["Scripts"],
             features: ["Basic features", "Regular updates", "Discord support"]
         },
@@ -45,7 +45,7 @@ const CONFIG = {
             originalPrice: null,
             category: "scripts",
             badge: "HOT",
-            image: null,
+            image: "assets/product.png",
             tags: ["Scripts"],
             features: ["All features", "Priority updates", "Premium Discord support"]
         }
