@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Product - Lunor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="corner-glow corner-glow-tl"></div>
+    <div class="corner-glow corner-glow-tr"></div>
+    <div class="corner-glow corner-glow-bl"></div>
+    <div class="corner-glow corner-glow-br"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/icon.png" alt="Lunor" class="logo-icon">
+                <span class="logo-text">Lunor</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link active">Products</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-detail-grid">
+                <div class="product-detail-image">
+                    <div class="product-image-box" id="productImage"></div>
+                </div>
+                <div class="product-detail-info">
+                    <div class="product-detail-badge" id="productBadge"></div>
+                    <h1 class="product-detail-title" id="productName">Loading...</h1>
+                    <div class="product-detail-tags" id="productTags"></div>
+                    <p class="product-detail-description" id="productDescription"></p>
+                    <div class="product-detail-price" id="productPrice"></div>
+                    <div class="product-detail-actions">
+                        <button class="btn btn-primary btn-large btn-full" id="addToCartBtn"
+                            onclick="addToCartFromPage()">
+                            Add to Cart
+                        </button>
+                    </div>
+                    <div class="product-detail-features">
+                        <h3>What's Included</h3>
+                        <ul id="productFeatures"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/icon.png" alt="Lunor" class="footer-logo">
+                    <span class="footer-name">Lunor</span>
+                </div>
+                <div class="footer-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="https://discord.gg/lnr" target="_blank">Discord</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Lunor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/effects.js"></script>
+    <script>
+        lucide.createIcons();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        let currentProduct = null;
+
+        function loadProduct() {
+            if (!productId) {
+                window.location.href = 'products.html';
+                return;
+            }
+
+            currentProduct = CONFIG.products.find(p => p.id === productId);
+            if (!currentProduct) {
+                window.location.href = 'products.html';
+                return;
+            }
+
+            document.title = currentProduct.name + ' - Lunor';
+            document.getElementById('productName').textContent = currentProduct.name;
+            document.getElementById('productDescription').textContent = currentProduct.longDescription;
+
+            const badgeEl = document.getElementById('productBadge');
+            if (currentProduct.badge) {
+                badgeEl.textContent = currentProduct.badge;
+                badgeEl.classList.add('visible');
+            }
+
+            const tagsEl = document.getElementById('productTags');
+            if (currentProduct.tags && currentProduct.tags.length > 0) {
+                tagsEl.innerHTML = currentProduct.tags.map(tag =>
+                    `<span class="product-tag">${tag}</span>`
+                ).join('');
+            }
+
+            const priceEl = document.getElementById('productPrice');
+            if (currentProduct.originalPrice) {
+                priceEl.innerHTML = `
+                    <span class="price-current">${CONFIG.store.currency}${currentProduct.price.toFixed(2)}</span>
+                    <span class="price-original">${CONFIG.store.currency}${currentProduct.originalPrice.toFixed(2)}</span>
+                `;
+            } else {
+                priceEl.innerHTML = `<span class="price-current">${CONFIG.store.currency}${currentProduct.price.toFixed(2)}</span>`;
+            }
+
+            const featuresEl = document.getElementById('productFeatures');
+            if (currentProduct.features) {
+                featuresEl.innerHTML = currentProduct.features.map(f => `<li>${f}</li>`).join('');
+            }
+
+            const imageEl = document.getElementById('productImage');
+            if (currentProduct.image) {
+                imageEl.innerHTML = `<img src="${currentProduct.image}" alt="${currentProduct.name}">`;
+            } else {
+                imageEl.innerHTML = `<div class="product-placeholder-icon"><img src="assets/icon.png" alt="Lunor"></div>`;
+            }
+        }
+
+        function addToCartFromPage() {
+            if (currentProduct) {
+                addToCart(currentProduct.id);
+            }
+        }
+
+        loadProduct();
+    </script>
+</body>
+
+</html>

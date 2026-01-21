@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Area - Lunor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon.png">
+    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="corner-glow corner-glow-tl"></div>
+    <div class="corner-glow corner-glow-tr"></div>
+    <div class="corner-glow corner-glow-bl"></div>
+    <div class="corner-glow corner-glow-br"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/icon.png" alt="Lunor" class="logo-icon">
+                <span class="logo-text">Lunor</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="client.html" class="btn btn-primary">Client Area</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="products.html" class="mobile-link">Products</a>
+        <a href="support.html" class="mobile-link">Support</a>
+    </div>
+
+    <section class="client-area">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <img src="assets/icon.png" alt="Lunor" class="auth-logo">
+                    <h1>Client Area</h1>
+                    <p>Sign in to access your purchases</p>
+                </div>
+
+                <form class="auth-form" onsubmit="return handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#">Create one</a></p>
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/icon.png" alt="Lunor" class="footer-logo">
+                    <span class="footer-name">Lunor</span>
+                </div>
+                <div class="footer-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="https://discord.gg/lnr" target="_blank">Discord</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Lunor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="particles" id="particles"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/effects.js"></script>
+    <script>
+        lucide.createIcons();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Client area coming soon! Sellauth integration pending.');
+            return false;
+        }
+    </script>
+</body>
+
+</html>

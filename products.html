@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Lunor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon.png">
+    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="corner-glow corner-glow-tl"></div>
+    <div class="corner-glow corner-glow-tr"></div>
+    <div class="corner-glow corner-glow-bl"></div>
+    <div class="corner-glow corner-glow-br"></div>
+
+    <div class="sale-banner" id="saleBanner">
+        <span class="sale-text">
+            <i data-lucide="moon" class="sale-icon-lucide"></i>
+            <span id="saleMessage">LAUNCH SPECIAL! Use code <strong id="saleCode">MOON20</strong> for <strong
+                    id="salePercent">20%</strong> OFF</span>
+        </span>
+        <button class="sale-close" onclick="closeSaleBanner()">×</button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/icon.png" alt="Lunor" class="logo-icon">
+                <span class="logo-text">Lunor</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link active">Products</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="products.html" class="mobile-link">Products</a>
+        <a href="support.html" class="mobile-link">Support</a>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Products</h1>
+            <p>Browse our collection of premium digital products</p>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+
+            <div class="category-filter">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="scripts">Scripts</button>
+                <button class="filter-btn" data-category="accounts">Accounts</button>
+                <button class="filter-btn" data-category="services">Services</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/icon.png" alt="Lunor" class="footer-logo">
+                    <span class="footer-name">Lunor</span>
+                </div>
+                <div class="footer-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="https://discord.gg/lnr" target="_blank">Discord</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Lunor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/effects.js"></script>
+    <script>
+        lucide.createIcons();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
