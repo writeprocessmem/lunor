@@ -20,24 +20,10 @@ function initCustomCursor() {
     const cursor = document.getElementById('cursor');
     if (!cursor) return;
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
-
-    function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest('a, button, .btn, .product-card, .feature-card, .stat-item, .faq-item, .contact-card, .discord-card, .cta-card, .auth-card')) {
