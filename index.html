@@ -224,33 +224,6 @@
         </div>
     </section>
 
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <i data-lucide="users" class="stat-icon"></i>
-                    <span class="stat-number">1K+</span>
-                    <span class="stat-label">Customers</span>
-                </div>
-                <div class="stat-item">
-                    <i data-lucide="package" class="stat-icon"></i>
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Products</span>
-                </div>
-                <div class="stat-item">
-                    <i data-lucide="heart" class="stat-icon"></i>
-                    <span class="stat-number">99%</span>
-                    <span class="stat-label">Satisfaction</span>
-                </div>
-                <div class="stat-item">
-                    <i data-lucide="clock" class="stat-icon"></i>
-                    <span class="stat-number">&lt;10m</span>
-                    <span class="stat-label">Support Response</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
@@ -297,40 +270,29 @@
                     <p>All products include lifetime updates at no additional cost.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="discord-cta">
-        <div class="container">
-            <div class="discord-card">
-                <div class="discord-card-content">
-                    <div class="discord-icon-large">
-                        <svg viewBox="0 0 71 55" fill="currentColor" width="48" height="48">
-                            <path
-                                d="M60.1 4.9C55.6 2.8 50.7 1.3 45.7.4c-.1 0-.2 0-.2.1-.7 1.1-1.4 2.6-1.9 3.7-5.5-.8-10.9-.8-16.3 0-.5-1.2-1.2-2.6-1.9-3.7 0-.1-.1-.1-.2-.1-5.1.9-9.9 2.4-14.4 4.5 0 0 0 0-.1.1C1.6 18.7-.9 32.1.3 45.4v.1c6.1 4.5 12 7.2 17.8 9 .1 0 .2 0 .2-.1 1.4-1.9 2.6-3.9 3.6-5.9.1-.1 0-.3-.1-.3-2-.8-3.8-1.7-5.6-2.7-.1-.1-.1-.3 0-.4.4-.3.8-.6 1.1-.9 0 0 .1-.1.2 0 11.6 5.3 24.2 5.3 35.7 0h.2c.4.3.7.6 1.1.9.1.1.1.3 0 .4-1.8 1.1-3.6 2-5.6 2.7-.1 0-.2.2-.1.3 1 2 2.2 4 3.6 5.9 0 .1.1.1.2.1 5.8-1.8 11.7-4.5 17.8-9v-.1c1.5-15.2-2.4-28.5-10.5-40.5zM23.7 37.3c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.4 3.2 6.4 7.2s-2.9 7.2-6.4 7.2zm23.6 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.2 6.4 7.2s-2.8 7.2-6.4 7.2z" />
-                        </svg>
-                    </div>
-                    <div class="discord-card-text">
-                        <h2>Join Our Community</h2>
-                        <p>Get support, updates, and connect with other users on Discord</p>
-                    </div>
-                    <a href="https://discord.gg/lnr" target="_blank" class="btn btn-primary btn-large">
-                        Join Discord
-                        <i data-lucide="external-link"></i>
-                    </a>
+            
+            <div class="stats-grid" style="margin-top: 4rem;">
+                <div class="stat-item">
+                    <i data-lucide="users" class="stat-icon"></i>
+                    <span class="stat-number" id="statCustomers">1K+</span>
+                    <span class="stat-label">Customers</span>
+                </div>
+                <div class="stat-item">
+                    <i data-lucide="package" class="stat-icon"></i>
+                    <span class="stat-number" id="statProducts">50+</span>
+                    <span class="stat-label">Products</span>
+                </div>
+                <div class="stat-item">
+                    <i data-lucide="heart" class="stat-icon"></i>
+                    <span class="stat-number" id="statSatisfaction">99%</span>
+                    <span class="stat-label">Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <i data-lucide="clock" class="stat-icon"></i>
+                    <span class="stat-number" id="statSupport">&lt;10m</span>
+                    <span class="stat-label">Support Response</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <div class="cta-card">
-                <div class="cta-content">
-                    <h2>Ready to get started?</h2>
-                    <p>Join thousands of satisfied customers today.</p>
-                    <a href="products.html" class="btn btn-primary btn-large">View Products</a>
-                </div>
             </div>
         </div>
     </section>
@@ -413,7 +375,82 @@
                 });
             }
             lucide.createIcons();
+            
+            // Auto-update stats
+            initAutoUpdateStats();
         });
+
+        function initAutoUpdateStats() {
+            // Function to fetch and update stats (replace with actual API call)
+            function updateStats() {
+                // Placeholder: In production, fetch from API
+                // For now, simulate updates with random variations
+                const stats = {
+                    customers: Math.floor(1000 + Math.random() * 100),
+                    products: Math.floor(50 + Math.random() * 10),
+                    satisfaction: (99 + Math.random()).toFixed(1),
+                    support: '<10m' // Keep as is
+                };
+
+                // Animate number updates
+                animateStat('statCustomers', stats.customers + '+');
+                animateStat('statProducts', stats.products + '+');
+                animateStat('statSatisfaction', stats.satisfaction + '%');
+                animateStat('statSupport', stats.support);
+            }
+
+            function animateStat(elementId, targetValue) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                const currentText = element.textContent;
+                const currentValue = parseFloat(currentText.replace(/[^0-9.]/g, ''));
+                const targetValueNum = parseFloat(targetValue.replace(/[^0-9.]/g, ''));
+
+                if (isNaN(currentValue) || isNaN(targetValueNum)) {
+                    // For non-numeric values, just update directly
+                    element.textContent = targetValue;
+                    return;
+                }
+
+                const duration = 1000; // 1 second animation
+                const startTime = Date.now();
+                const startValue = currentValue;
+                const difference = targetValueNum - startValue;
+
+                function update() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    const current = startValue + (difference * easeOutQuart);
+                    
+                    // Format based on original format
+                    if (targetValue.includes('+')) {
+                        element.textContent = Math.floor(current) + '+';
+                    } else if (targetValue.includes('%')) {
+                        element.textContent = current.toFixed(1) + '%';
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        element.textContent = targetValue;
+                    }
+                }
+
+                update();
+            }
+
+            // Update stats immediately on load
+            updateStats();
+
+            // Update stats every 30 seconds
+            setInterval(updateStats, 30000);
+        }
     </script>
 </body>
 
