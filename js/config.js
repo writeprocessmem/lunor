@@ -27,7 +27,7 @@ const CONFIG = {
             features: ["Basic features", "Regular updates", "Discord support"],
             robuxGamepassId: "1663749465",
             robuxPrice: 500,
-            robuxGamepassLink: "https://www.roblox.com/game-pass/1663749465"
+            robuxGamepassLink: "https://www.roblox.com/game-pass/YOUR_GAMEPASS_ID_HERE"
         },
         {
             id: "lunor-premium",
@@ -43,8 +43,7 @@ const CONFIG = {
             features: ["All features", "Priority updates", "Premium Discord support"],
             robuxGamepassId: "1663004111",
             robuxPrice: 1500,
-            robuxGamepassLink: "https://www.roblox.com/game-pass/1663004111"
+            robuxGamepassLink: "https://www.roblox.com/game-pass/YOUR_GAMEPASS_ID_HERE"
         }
     ]
 };
-

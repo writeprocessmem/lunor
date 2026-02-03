@@ -159,7 +159,6 @@
             color: #fff;
         }
 
-        /* Close dropdown when clicking outside */
         .dropdown-overlay {
             position: fixed;
             top: 0;
@@ -172,6 +171,17 @@
 
         .dropdown-overlay.show {
             display: block;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+            appearance: textfield;
         }
     </style>
 
@@ -247,8 +257,8 @@
                 <h1>Reseller Area</h1>
                 <p>Track your affiliate performance and earnings</p>
             </div>
-            <button onclick="logout()" class="btn"
-                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); display: inline-flex; align-items: center; gap: 0.5rem;">
+            <button onclick="logout()" class="btn btn-secondary"
+                style="display: inline-flex; align-items: center; gap: 0.5rem;">
                 <i data-lucide="log-out" style="width: 18px; height: 18px;"></i>
                 <span>Logout</span>
             </button>
@@ -292,44 +302,65 @@
                     </h2>
                     <div
                         style="background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; margin-top: 1rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <input type="text" id="affiliateLink" value="https://lunor.wtf/?ref=YOUR_CODE" readonly
-                                style="flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 0.75rem 1rem; color: #fff; font-family: monospace; font-size: 0.9rem;">
-                            <button onclick="copyAffiliateLink()" class="btn btn-secondary"
-                                style="white-space: nowrap;">
-                                <i data-lucide="copy" style="width: 18px; height: 18px;"></i>
-                                Copy
-                            </button>
-                        </div>
-                        <p style="color: #aaa; font-size: 0.9rem; margin: 0;">
-                            Share this link to start earning commissions on every sale!
-                        </p>
-                    </div>
-                </div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <!-- Link Display -->
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <input type="text" id="affiliateLink" value="https://lunor.wtf/?ref=YOUR_CODE" readonly
+                                    style="flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 0.75rem 1rem; color: #fff; font-family: monospace; font-size: 0.9rem;">
+                                <button onclick="copyAffiliateLink()" class="btn btn-secondary"
+                                    style="white-space: nowrap;">
+                                    <i data-lucide="copy" style="width: 18px; height: 18px;"></i>
+                                    Copy
+                                </button>
+                            </div>
 
-                <div class="support-section">
-                    <h2>
-                        <i data-lucide="info"></i>
-                        Quick Info
-                    </h2>
-                    <div style="margin-top: 1rem;">
-                        <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem;">
-                            <div style="margin-bottom: 1rem;">
-                                <p style="color: #aaa; margin-bottom: 0.5rem;">Commission Rate</p>
-                                <p style="color: #fff; font-size: 1.5rem; font-weight: 600; margin: 0;">Up to 30%</p>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <p style="color: #aaa; margin-bottom: 0.5rem;">Withdrawal Cooldown</p>
-                                <p style="color: #fff; font-size: 1.5rem; font-weight: 600; margin: 0;">7 Days</p>
-                            </div>
+                            <!-- Edit Code -->
                             <div>
-                                <p style="color: #aaa; margin-bottom: 0.5rem;">Payment Methods</p>
-                                <p style="color: #fff; font-size: 1rem; margin: 0;">PayPal & Crypto</p>
+                                <h3 style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem; font-weight: 500;">
+                                    Customize Code</h3>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <input type="text" id="customCodeInput" placeholder="Enter custom code"
+                                        style="flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 0.75rem 1rem; color: #fff; font-family: monospace; font-size: 0.9rem;">
+                                    <button onclick="updateReferralCode()" class="btn btn-primary"
+                                        style="white-space: nowrap;">
+                                        Save
+                                    </button>
+                                </div>
+                                <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem; margin-bottom: 0;">
+                                    Alphanumeric characters only. 3-20 characters.
+                                </p>
                             </div>
+                        </div>
+                    </div>
+                    <p style="color: #aaa; font-size: 0.9rem; margin: 0;">
+                        Share this link to start earning commissions on every sale!
+                    </p>
+                </div>
+            </div>
+
+            <div class="support-section">
+                <h2>
+                    <i data-lucide="info"></i>
+                    Quick Info
+                </h2>
+                <div style="margin-top: 1rem;">
+                    <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <p style="color: #aaa; margin-bottom: 0.5rem;">Commission Rate</p>
+                            <p style="color: #fff; font-size: 1.5rem; font-weight: 600; margin: 0;">Up to 30%</p>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <p style="color: #aaa; margin-bottom: 0.5rem;">Withdrawal Cooldown</p>
+                            <p style="color: #fff; font-size: 1.5rem; font-weight: 600; margin: 0;">7 Days</p>
+                        </div>
+                        <div>
+                            <p style="color: #aaa; margin-bottom: 0.5rem;">Payment Methods</p>
+                            <p style="color: #fff; font-size: 1rem; margin: 0;">PayPal & Crypto</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -347,7 +378,8 @@
                         <p style="color: #fff; font-size: 3rem; font-weight: 700; margin: 0;" id="availableBalance">
                             $1,234.56</p>
                         <p style="color: #666; font-size: 0.85rem; margin-top: 0.5rem; margin-bottom: 0;">Pending:
-                            $89.12</p>
+                            <span id="pendingBalance">$0.00</span>
+                        </p>
                     </div>
                 </div>
 
@@ -795,9 +827,19 @@
                 linkInput.value = `https://lunor.wtf/?ref=${currentAffiliate.referral_code}`;
             }
 
+            const codeInput = document.getElementById('customCodeInput');
+            if (codeInput) {
+                codeInput.value = currentAffiliate.referral_code;
+            }
+
             const balanceEl = document.getElementById('availableBalance');
             if (balanceEl) {
                 balanceEl.textContent = `$${parseFloat(currentAffiliate.available_balance || 0).toFixed(2)}`;
+            }
+
+            const pendingEl = document.getElementById('pendingBalance');
+            if (pendingEl) {
+                pendingEl.textContent = `$${parseFloat(currentAffiliate.pending_balance || 0).toFixed(2)}`;
             }
         }
 
@@ -937,6 +979,35 @@
                 }
             } catch (err) {
                 showNotification('Withdrawal failed. Please try again.');
+            }
+        }
+
+        async function updateReferralCode() {
+            const newCode = document.getElementById('customCodeInput').value.trim();
+            if (!newCode) return;
+
+            try {
+                const response = await fetch(`${WORKER_URL}/api/affiliate/update-code`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${affiliateToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ newCode })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showNotification(data.error || 'Failed to update code');
+                    return;
+                }
+
+                currentAffiliate.referral_code = data.referral_code;
+                updateAffiliateUI();
+                showNotification('Referral code updated!');
+            } catch (err) {
+                showNotification('Failed to update code');
             }
         }
 

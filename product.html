@@ -98,6 +98,10 @@
                             onclick="addToCartFromPage()">
                             Add to Cart
                         </button>
+                        <button class="btn btn-full" onclick="buyNowRobux()"
+                            style="margin-top: 0.5rem; background: linear-gradient(135deg, #00b06f 0%, #00d884 100%); color: white; border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 600;">
+                            <span style="font-weight: 700;">R$</span> Checkout With Robux
+                        </button>
                     </div>
                     <div class="product-detail-features">
                         <h3>What's Included</h3>
@@ -239,6 +243,12 @@
         function addToCartFromPage() {
             if (currentProduct) {
                 addToCart(currentProduct.id);
+            }
+        }
+
+        function buyNowRobux() {
+            if (currentProduct) {
+                window.location.href = `robux-checkout.html?product=${currentProduct.id}`;
             }
         }
 
