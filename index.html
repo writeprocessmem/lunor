@@ -270,7 +270,7 @@
                     <p>All products include lifetime updates at no additional cost.</p>
                 </div>
             </div>
-            
+
             <div class="stats-grid" style="margin-top: 4rem;">
                 <div class="stat-item">
                     <i data-lucide="users" class="stat-icon"></i>
@@ -293,7 +293,7 @@
                     <span class="stat-label">Support Response</span>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     </section>
 
@@ -319,7 +319,7 @@
         </div>
     </footer>
 
-    <!-- Discord Copy Notification -->
+
     <div id="discordNotification"
         style="position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 12px; z-index: 10000; transition: bottom 0.3s ease; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
         <svg viewBox="0 0 71 55" fill="#5865F2" width="24" height="24">
@@ -354,6 +354,10 @@
                 <span id="cartTotal">$0.00</span>
             </div>
             <button class="btn btn-primary btn-full" onclick="checkout()">Checkout</button>
+            <button class="btn btn-full" onclick="checkoutWithRobux()"
+                style="margin-top: 0.5rem; background: linear-gradient(135deg, #00b06f 0%, #00d884 100%); color: white; border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <span style="font-weight: 700;">R$</span> Checkout With Robux
+            </button>
         </div>
     </div>
 
@@ -375,24 +379,21 @@
                 });
             }
             lucide.createIcons();
-            
+
             // Auto-update stats
             initAutoUpdateStats();
         });
 
         function initAutoUpdateStats() {
-            // Function to fetch and update stats (replace with actual API call)
             function updateStats() {
-                // Placeholder: In production, fetch from API
-                // For now, simulate updates with random variations
                 const stats = {
                     customers: Math.floor(1000 + Math.random() * 100),
                     products: Math.floor(50 + Math.random() * 10),
                     satisfaction: (99 + Math.random()).toFixed(1),
-                    support: '<10m' // Keep as is
+                    support: '<10m'
                 };
 
-                // Animate number updates
+
                 animateStat('statCustomers', stats.customers + '+');
                 animateStat('statProducts', stats.products + '+');
                 animateStat('statSatisfaction', stats.satisfaction + '%');
@@ -408,12 +409,11 @@
                 const targetValueNum = parseFloat(targetValue.replace(/[^0-9.]/g, ''));
 
                 if (isNaN(currentValue) || isNaN(targetValueNum)) {
-                    // For non-numeric values, just update directly
                     element.textContent = targetValue;
                     return;
                 }
 
-                const duration = 1000; // 1 second animation
+                const duration = 1000;
                 const startTime = Date.now();
                 const startValue = currentValue;
                 const difference = targetValueNum - startValue;
@@ -421,12 +421,10 @@
                 function update() {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    
-                    // Easing function for smooth animation
+
                     const easeOutQuart = 1 - Math.pow(1 - progress, 4);
                     const current = startValue + (difference * easeOutQuart);
-                    
-                    // Format based on original format
+
                     if (targetValue.includes('+')) {
                         element.textContent = Math.floor(current) + '+';
                     } else if (targetValue.includes('%')) {
@@ -445,10 +443,8 @@
                 update();
             }
 
-            // Update stats immediately on load
             updateStats();
 
-            // Update stats every 30 seconds
             setInterval(updateStats, 30000);
         }
     </script>

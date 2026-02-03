@@ -1,13 +1,3 @@
-/*
-
-
- BADGE OPTIONS: "HOT", "NEW", "SALE", "BEST VALUE", or null for none
- CATEGORY OPTIONS: "scripts", "accounts", "services"
- TAGS: Any string array, e.g. ["Scripts", "Popular"]
- 
-
- */
-
 const CONFIG = {
     store: {
         name: "Lunor",
@@ -34,7 +24,10 @@ const CONFIG = {
             badge: null,
             image: "assets/product.png",
             tags: ["Scripts"],
-            features: ["Basic features", "Regular updates", "Discord support"]
+            features: ["Basic features", "Regular updates", "Discord support"],
+            robuxGamepassId: "1663749465",
+            robuxPrice: 500,
+            robuxGamepassLink: "https://www.roblox.com/game-pass/YOUR_GAMEPASS_ID_HERE"
         },
         {
             id: "lunor-premium",
@@ -47,7 +40,10 @@ const CONFIG = {
             badge: "HOT",
             image: "assets/product.png",
             tags: ["Scripts"],
-            features: ["All features", "Priority updates", "Premium Discord support"]
+            features: ["All features", "Priority updates", "Premium Discord support"],
+            robuxGamepassId: "1663004111",
+            robuxPrice: 1500,
+            robuxGamepassLink: "https://www.roblox.com/game-pass/YOUR_GAMEPASS_ID_HERE"
         }
     ]
 };

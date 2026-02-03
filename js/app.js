@@ -2,12 +2,31 @@ let cart = [];
 let currentFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
+    initializeReferralTracking();
     initializeSaleBanner();
     renderProducts();
     initializeFilters();
     loadCart();
     updateCartUI();
 });
+
+function initializeReferralTracking() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref');
+
+    if (refCode) {
+        localStorage.setItem('referralCode', refCode);
+
+        fetch('https://lunor-checkout.re9ostedscripts.workers.dev/api/track-click', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ referralCode: refCode })
+        }).catch(() => { });
+
+        const cleanUrl = window.location.pathname + window.location.hash;
+        history.replaceState({}, document.title, cleanUrl);
+    }
+}
 
 function initializeSaleBanner() {
     const banner = document.getElementById('saleBanner');
@@ -193,6 +212,29 @@ function checkout() {
     }
 
     showNotification('Checkout coming soon! Sellauth integration pending.');
+}
+
+function checkoutWithRobux() {
+    if (cart.length === 0) {
+        showNotification('Your cart is empty');
+        return;
+    }
+
+    // Get the first product in cart for Robux checkout
+    const firstItem = cart[0];
+    const product = CONFIG.products.find(p => p.id === firstItem.id);
+
+    if (!product) {
+        showNotification('Product not found');
+        return;
+    }
+
+    if (!product.robuxGamepassId || product.robuxGamepassId === 'YOUR_GAMEPASS_ID_HERE') {
+        showNotification('Robux checkout not configured for this product');
+        return;
+    }
+
+    window.location.href = `robux-checkout.html?product=${firstItem.id}`;
 }
 
 function toggleMobileMenu() {
